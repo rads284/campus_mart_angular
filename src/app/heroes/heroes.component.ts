@@ -36,34 +36,14 @@ export class HeroesComponent implements OnInit {
     }
   }
   loadData(){
-    // console.log("Loading");
-    // let new_len = Array.of(this.documents).length + 5;
-    // console.log(new_len);
     this.heroService.searchDoc("",this.offset,this.offset+5).subscribe(data=>{
-      // this.documents = data.slice(1,new_len);
       this.offset+=5;
-
-      // console.log(data[0]);
-      // let x = Array(data)[0];
-      // console.log(Array(x));
       for(let i=0;i<5;++i)
       {
-      //   console.log(typeof(e));
-      //   // this.documents.push(e[0]);
-      //   if(e){
-      //   for(var i=0;i < (e.length);i++)
-      //   {
-      //   //   console.log(i);
       if(data[i]){
           this.documents.push(data[i]);
         }
         }
-      // }
-        // // for(let a of e){
-          // console.log(a);
-          // this.documents.push(a);
-        // }
-      // }
     })
   }
   getHeroes(): void {
@@ -81,18 +61,6 @@ export class HeroesComponent implements OnInit {
     }
   );
   }
-  add(name: string): void {
-    name = name.trim();
-    if (!name) { return; }
-    this.heroService.addHero({ name } as Course)
-      .subscribe(hero => {
-        this.heroes.push(hero);
-      });
-  }
 
-  delete(hero: Course): void {
-    this.heroes = this.heroes.filter(h => h !== hero);
-    this.heroService.deleteHero(hero).subscribe();
-  }
 
 }
